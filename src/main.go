@@ -12,6 +12,8 @@ import (
 )
 
 var fuckRegex = regexp.MustCompile("f+u+c+k*")
+var fukcRegex = regexp.MustCompile("f+u+k+c*")
+
 var гudeScreams = [5]string{"WHAT THE FUCK", "FUCK YOU", "SHUT THE FUCK UP", "EAT SHIT", "LOST THE GAME?"}
 var veryGood = []string{"very good", "very very good", "super cool", "very very well", "well done", "nice", "very nice", "not bad", "quite not bad", "okay", "very very okay", "about to lose the game"}
 
@@ -52,9 +54,10 @@ func main() {
 		userName := update.Message.From.UserName
 
 		if !update.Message.IsCommand() {
-			found := fuckRegex.Find([]byte(update.Message.Text))
+			found1 := fuckRegex.Find([]byte(update.Message.Text))
+			found2 := fukcRegex.Find([]byte(update.Message.Text))
 
-			if found != nil {
+			if found1 != nil || found2 != nil {
 				fuckManager.AddMessage(userId, userName, 1)
 				log.Printf("got fuck message from user %d\n", userId)
 			} else {
