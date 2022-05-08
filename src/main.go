@@ -15,7 +15,7 @@ var fuckRegex = regexp.MustCompile("f+u+c+k*")
 var fukcRegex = regexp.MustCompile("f+u+k+c*")
 
 var гudeScreams = [5]string{"WHAT THE FUCK", "FUCK YOU", "SHUT THE FUCK UP", "EAT SHIT", "LOST THE GAME?"}
-var veryGood = []string{"very good", "very very good", "super cool", "very very well", "well done", "nice", "very nice", "not bad", "quite not bad", "okay", "very very okay", "about to lose the game"}
+var veryGood = []string{"very good", "very very good", "very very very good", "super cool", "very very well", "well done", "nice", "very nice", "not bad", "quite not bad", "okay", "very very okay", "about to lose the GAME"}
 
 func main() {
 	if err := godotenv.Load(); err != nil {
@@ -82,7 +82,11 @@ func main() {
 			msg.Text = гudeScreams[rand.Intn(len(гudeScreams))]
 		} else {
 			for _, v := range fuckManager.Entries {
-				msg.Text = msg.Text + fmt.Sprintf("_%s_ fuc k is *%d%%* (%d/%d) - %s result\n", v.Name, v.Fuck*100/v.Total, v.Fuck, v.Total, veryGood[rand.Intn(len(veryGood))])
+				percents := v.Fuck * 100 / v.Total
+				resultMessage := veryGood[rand.Intn(len(veryGood))]
+				line := fmt.Sprintf("_%s_ fuc k is *%d%%* (%d/%d) - %s result\n", v.Name, percents, v.Fuck, v.Total, resultMessage)
+
+				msg.Text = msg.Text + line
 			}
 		}
 
